@@ -14,4 +14,6 @@ object UserLogInfo {
   import db.utils.TimestampHelper._
 
   implicit val appUserFormat: Format[UserLogInfo] = Json.format[UserLogInfo]
+
+  def tupled = (UserLogInfo.apply _).tupled
 }

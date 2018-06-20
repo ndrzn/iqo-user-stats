@@ -9,4 +9,6 @@ case class AppUser(id: Int, name: String)
 
 object AppUser{
   implicit val appUserFormat: Format[AppUser] = Json.format[AppUser]
+
+  def tupled = (AppUser.apply _).tupled
 }

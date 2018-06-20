@@ -24,7 +24,7 @@ class DefaultHttpServer(httpServerConfig: HttpServerConfig, routes: Controller*)
 
   implicit val system = ActorSystem("http")
   implicit val materializer = ActorMaterializer()
-  implicit val executionContext = system.dispatcher
+  implicit val executionContext = system.dispatchers.lookup("custom-dispatcher")
 
   def route() = routes.foldRight((new ErrorController).route)((a, b) => a.route ~ b)
 

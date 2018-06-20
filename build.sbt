@@ -12,6 +12,8 @@ val akkaHttpVersion = "10.1.3"
 libraryDependencies ++= Seq(
   "net.codingwell" %% "scala-guice" % "4.1.1",
   "com.typesafe.slick" %% "slick" % "3.2.3",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.2.0",
+  "org.postgresql" % "postgresql" % "9.4.1212",
   "org.cache2k" % "cache2k-api" % "1.0.2.Final",
   "org.cache2k" % "cache2k-all" % "1.0.2.Final",
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
@@ -19,8 +21,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-stream" % akkaVersion,
   "com.typesafe.play" %% "play-json" % "2.6.0",
   "ch.qos.logback" % "logback-classic" % "1.2.3",
-  "com.typesafe.scala-logging" %% "scala-logging" % "3.9.0",
-  "com.typesafe" % "config" % "1.3.3"
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.9.0"
 )
 
 
