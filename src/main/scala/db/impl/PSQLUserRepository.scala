@@ -12,9 +12,8 @@ class PSQLUserRepository extends UserRepository{
 
   override def create(newUser: AppUser): Future[AppUser] = Future.successful(AppUser(1, ""))
 
-  override def findUser(userId: Int): Future[AppUser] = Future.successful(AppUser(1, ""))
+  override def find(userId: Int): Future[Option[AppUser]] = Future.successful(Some(AppUser(1, "")))
 
-  override def uniqueStat(): Future[Seq[UserLogInfo]] = Future.successful(Seq())
+  override def find(name: String): Future[Option[AppUser]] = Future.successful(Some(AppUser(1, "")))
 
-  override def detailedStat(user: AppUser): Future[Seq[UserLogInfo]] = Future.successful(Seq())
 }

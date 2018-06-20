@@ -11,7 +11,7 @@ case class UserLogInfo (id: Int, userId: Int, userAgent: String, ip: String, log
 
 object UserLogInfo {
 
-  import db.utils.TimestampConverter._
+  import db.utils.TimestampHelper._
 
   implicit val appUserFormat: Format[UserLogInfo] = Json.format[UserLogInfo]
 }

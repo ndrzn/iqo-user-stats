@@ -25,7 +25,7 @@ class ErrorController extends Controller with LazyLogging{
   override def route: Route = {implicit ctx =>
       import http.utils.HeaderExtractor._
 
-      logger.info(s"[${new Date()}] Illegal route access =>  $ip : ${ctx.request.uri.path}, $userAgent")
+      logger.info(s"[${new Date()}] Illegal route access =>  [ip:$ip path:${ctx.request.uri.path}] $userAgent")
 
       Future.successful(Complete(HttpResponse(NotFound, entity =  "The requested page could not be found.")))
   }
