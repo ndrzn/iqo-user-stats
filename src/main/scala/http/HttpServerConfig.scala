@@ -15,6 +15,7 @@ trait HttpServerConfig {
 
   val interface: String
 
+  // Keep server alive on failure or terminate
   val restartPolicy: RestartPolicy
 
   val restartTimeout : FiniteDuration

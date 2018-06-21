@@ -11,11 +11,27 @@ import scala.concurrent.Future
 @ImplementedBy(classOf[PSQLUserLogRepository])
 trait UserLogRepository {
 
+  /**
+    * Create new UserLogInfo record
+    *
+    * @param record
+    * @return
+    */
   def create(record: UserLogInfo) : Future[UserLogInfo]
 
-  def find(userId : Int) : Future[Seq[UserLogInfo]]
+  /**
+    * Get list of user logs by user id
+    *
+    * @param userId
+    * @param limit
+    * @return
+    */
+  def findByUser(userId : Int, limit: Int = 20) : Future[Seq[UserLogInfo]]
 
+  /**
+    * Get unique user entries (the newest ones)
+    *
+    * @return
+    */
   def uniqueStat(): Future[Seq[UserLogInfo]]
-
-  def detailedStat(user: AppUser, limit: Int = 20): Future[Seq[UserLogInfo]]
 }

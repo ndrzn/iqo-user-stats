@@ -11,6 +11,7 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.RouteResult.Complete
 import akka.stream.ActorMaterializer
+import http.controllers.ErrorController
 
 import scala.util.{Failure, Success}
 

@@ -18,13 +18,17 @@ object ArgsExtractor extends LazyLogging {
 
   def validatePort(p: String): Option[Port] = Try(p.toInt).toOption.map(Port)
 
+  /**
+    * Simple command line arguments parser
+    *
+    * @param args
+    * @return list of valid arguments
+    */
   def apply(args: Array[String]): Seq[AppArgs] = {
 
     @tailrec
     def extract(arr: List[String], l: List[AppArgs] = Nil): List[AppArgs] = arr match {
-      case Nil =>
-        logger.debug(l.toString())
-        l
+      case Nil => l
       case x :: xs if x == "--in-memory" => extract(xs, InMemory :: l)
       case x :: y :: xs if x == "-p" => {
         val port = validatePort(y)

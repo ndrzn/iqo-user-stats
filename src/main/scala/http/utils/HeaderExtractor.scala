@@ -1,7 +1,6 @@
 package http.utils
 
-import akka.http.javadsl.model.MediaType
-import akka.http.scaladsl.model.{HttpHeader, MediaTypes, RemoteAddress}
+import akka.http.scaladsl.model.{HttpEntity, _}
 import akka.http.scaladsl.model.headers._
 import akka.http.scaladsl.server.RequestContext
 import akka.http.scaladsl.server.directives.HeaderDirectives.headerValuePF
@@ -16,12 +15,18 @@ import com.typesafe.scalalogging.LazyLogging
   */
 object HeaderExtractor extends LazyLogging{
 
-  def contentType(implicit ctx: RequestContext): MediaType = ctx.request.headers.collectFirst {
-    case `Content-Type`(ct) => ct.mediaType
-  }.getOrElse(MediaTypes.`text/html`)
+  def contentType(implicit ctx: RequestContext): MediaType = {
+    ctx.request.headers.collectFirst {
+      case `Content-Type`(ct) => ct.mediaType
+    }.getOrElse(
+      ctx.request.entity match {
+        case HttpEntity.Strict(ct, _) => ct.mediaType
+        case _ => MediaTypes.`text/html`
+      }
+    )
+  }
 
   def ip(implicit ctx: RequestContext): RemoteAddress = {
-    logger.debug(ctx.request.headers.toString())
     ctx.request.headers.collectFirst {
       case `X-Forwarded-For`(Seq(address, _*)) ⇒ address
       case `Remote-Address`(address) ⇒ address

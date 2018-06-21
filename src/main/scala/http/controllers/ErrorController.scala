@@ -1,25 +1,22 @@
-package http.impl
+package http.controllers
 
 import java.util.Date
 
-import akka.http.scaladsl.model._
-import db.UserRepository
-import http.Controller
-import javax.inject.Inject
-import akka.http.scaladsl.Http
-import akka.http.scaladsl.model.HttpMethods._
-import akka.http.scaladsl.server.{RequestContext, Route, RouteResult}
-import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.model.StatusCodes._
-import akka.http.scaladsl.server._
-import Directives._
+import akka.http.scaladsl.model._
+import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.RouteResult.Complete
 import com.typesafe.scalalogging.LazyLogging
+import http.Controller
 
 import scala.concurrent.Future
 
 /**
   * Created by Andrei Zubrilin, 2018
+  */
+
+/**
+  * Handling invalid server routes
   */
 class ErrorController extends Controller with LazyLogging{
   override def route: Route = {implicit ctx =>

@@ -2,7 +2,9 @@ package http.impl
 
 import com.google.inject.Inject
 import com.typesafe.config.Config
+import com.typesafe.scalalogging.LazyLogging
 import http.{HttpServerConfig, KeepAlive, Terminate}
+import utils.Port
 
 import scala.concurrent.duration._
 import scala.util.Try
@@ -10,8 +12,16 @@ import scala.util.Try
 /**
   * Created by Andrei Zubrilin, 2018
   */
-class DefaultHttpConfig @Inject()(config: Config) extends HttpServerConfig {
-  val httpConfig = config.getConfig("Http")
+class DefaultHttpConfig @Inject()(config: Config) extends HttpServerConfig with LazyLogging {
+
+  val httpConfig = Try{
+    val c = config.getConfig("app.http")
+    logger.info("Http config successfully loaded.")
+    c
+  }.getOrElse{
+    logger.info("Http config not found, using default..")
+    config
+  }
 
   val defaultPort = 7979
 

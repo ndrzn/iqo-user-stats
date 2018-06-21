@@ -40,7 +40,7 @@ class UserCacheRepositorySpec extends AsyncFlatSpec with Matchers {
 
     l.id should be >= 0
 
-    userLogs.find(u.id) map (r => r.length should be > 0)
+    userLogs.findByUser(u.id) map (r => r.length should be > 0)
 
     userLogs.uniqueStat() map(r => r.length should be > 0)
   }

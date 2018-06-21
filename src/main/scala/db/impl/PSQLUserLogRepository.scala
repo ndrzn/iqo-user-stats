@@ -46,11 +46,33 @@ class PSQLUserLogRepository @Inject()(db : Database, val users: PSQLUserReposito
   lazy val userLogs = new TableQuery(tag => new UserLogs(tag))
 
 
-  override def create(record: UserLogInfo): Future[UserLogInfo] = Future.successful(UserLogInfo(-1,-1,"","", new Date))
+  override def create(record: UserLogInfo): Future[UserLogInfo] = {
+    val action = (userLogs.map(l => (
+      l.userId,
+      l.userAgent,
+      l.ip,
+      l.loggedAt
+    )) returning userLogs.map(_.id)) +=
+      (
+        record.userId,
+        record.userAgent,
+        record.ip,
+        record.loggedAt
+      )
 
-  override def find(userId: Int): Future[Seq[UserLogInfo]] = Future.successful(Nil)
+    db.run(action).map(id => record.copy(id = id))
+  }
 
-  override def uniqueStat(): Future[Seq[UserLogInfo]] = Future.successful(Seq(UserLogInfo(-1,-1,"","", new Date)))
+  override def findByUser(userId: Int, limit: Int = 20): Future[Seq[UserLogInfo]] = {
+    db.run(userLogs.filter(_.userId === userId).take(limit).result)
+  }
 
-  override def detailedStat(user: AppUser, limit: Int): Future[Seq[UserLogInfo]] = Future.successful(Nil)
+  override def uniqueStat(): Future[Seq[UserLogInfo]] = {
+
+    //For some reason slick's distinctOn still is not working
+    val sql = sql"""select distinct on (user_id) * from user_logs""".as[UserLogInfo]
+
+    db.run(sql)
+  }
+
 }

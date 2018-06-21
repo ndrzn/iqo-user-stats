@@ -11,6 +11,9 @@ import play.api.libs.json._
   */
 object TimestampHelper {
 
+  /**
+    * Timestamp json format converter
+    */
   implicit val timestampFormat: Format[Timestamp] = new Format[Timestamp]{
     val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SS'Z'")
     def writes(t: Timestamp): JsValue = JsString(format.format(t))
