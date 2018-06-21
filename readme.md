@@ -25,14 +25,14 @@
     
 ### Installation
 
-####1. Option: test api via temp server
+##### 1. Option: test api via temp server
 
 [http://51.38.39.172/stat](http://51.38.39.172/stat)
 
 [http://51.38.39.172/user/1](http://51.38.39.172/user/1)
 
  
-####2. Option: Download and run fatJar (~35mb)
+##### 2. Option: Download and run fatJar (~35mb)
 ```html
     wget https://bitbucket.org/jsfwa/iqo-user-stats/downloads/iqo-user-stats-0.1.4
     sudo chmod +x iqo-user-stats-0.1.4
@@ -40,7 +40,7 @@
 ```
 * [--in-memory] - just to play with api without using database
 
-####3. Option: sbt
+##### 3. Option: sbt
 ```html
     git clone https://jsfwa@bitbucket.org/jsfwa/iqo-user-stats.git
     sbt "run [-p <port>] [--in-memory]"  
