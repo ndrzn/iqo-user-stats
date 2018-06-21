@@ -16,8 +16,4 @@ package object http {
   implicit def ControllerToRoute(c: Controller): Route = {
     c.route
   }
-
-  implicit def RouteToPartialFunc(r: Route) : PartialFunction[RequestContext, Future[RouteResult]] = {
-    case
-  }
 }

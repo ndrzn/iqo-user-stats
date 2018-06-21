@@ -1,5 +1,7 @@
 package utils
 
+import com.typesafe.scalalogging.LazyLogging
+
 import scala.annotation.tailrec
 import scala.util.Try
 
@@ -12,10 +14,16 @@ case class Port(v: Int) extends AppArgs
 
 case object InMemory extends AppArgs
 
-object ArgsExtractor {
+object ArgsExtractor extends LazyLogging {
 
   def validatePort(p: String): Option[Port] = Try(p.toInt).toOption.map(Port)
 
+  /**
+    * Simple command line arguments parser
+    *
+    * @param args
+    * @return list of valid arguments
+    */
   def apply(args: Array[String]): Seq[AppArgs] = {
 
     @tailrec

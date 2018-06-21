@@ -12,11 +12,10 @@ class ArgsExtractorSpec extends FlatSpec with Matchers {
 
   "ArgsExtractor" should "correctly parse input" in {
 
-    ArgsExtractor(goodArgs) should equal(List(Port(1234), InMemory))
+    ArgsExtractor(goodArgs) should contain allOf (Port(1234), InMemory)
 
     ArgsExtractor(mixedArgs) should have length 1
 
     ArgsExtractor(badArgs) shouldBe Nil
   }
-
 }

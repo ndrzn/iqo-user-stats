@@ -13,9 +13,7 @@ trait UserRepository {
 
   def create(newUser: AppUser) : Future[AppUser]
 
-  def findUser(userId: Int) : Future[AppUser]
+  def find(userId: Int) : Future[Option[AppUser]]
 
-  def uniqueStat() : Future[Seq[UserLogInfo]]
-
-  def detailedStat(user: AppUser) : Future[Seq[UserLogInfo]]
+  def find(name: String) : Future[Option[AppUser]]
 }
