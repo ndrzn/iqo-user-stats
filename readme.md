@@ -27,6 +27,7 @@
 
 #####1. Option: test api via temp server
 
+[http://51.38.39.172/stat](http://51.38.39.172/stat)
 [http://51.38.39.172/user/1](http://51.38.39.172/user/1)
 
  
